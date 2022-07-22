@@ -5,6 +5,7 @@ class Coin(db.Model):
     __tablename__ = 'coin'
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     name = db.Column(db.String(255))
+    symbol = db.Column(db.String(255))
     image_file = db.Column(db.String(255))
     coin_hashrates = db.relationship('CoinHashrate', backref='coin', lazy=True)
     pool_hashrates = db.relationship('PoolHashrate', backref='coin', lazy=True)
@@ -12,8 +13,9 @@ class Coin(db.Model):
 
 class CoinHashrate(db.Model):
     __tablename__ = 'coin_hashrate'
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
     coin_id = db.Column(db.Integer(), db.ForeignKey('coin.id'), nullable=False)
-    hashrate = db.Column(db.Integer)
+    hashrate = db.Column(db.String(255))
     week = db.Column(db.Integer())
 
 
@@ -28,6 +30,7 @@ class MiningPool(db.Model):
 
 class PoolHashrate(db.Model):
     __tablename__ = 'pool_hashrate'
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
     mining_pool_id = db.Column(db.Integer(), db.ForeignKey('mining_pool.id'), nullable=False)
     coin_id = db.Column(db.Integer(), db.ForeignKey('coin.id'), nullable=False)
     hashrate = db.Column(db.Integer())
@@ -36,6 +39,7 @@ class PoolHashrate(db.Model):
 
 class MiningLocation(db.Model):
     __tablename__ = 'mining_location'
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
     mining_pool_id = db.Column(db.Integer(), db.ForeignKey('mining_pool.id'), nullable=False)
     country = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float())
