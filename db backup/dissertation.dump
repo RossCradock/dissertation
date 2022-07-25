@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `coin`;
 CREATE TABLE `coin` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '',
-  `symbol` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `symbol` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `image_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `symbol` (`symbol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `coin` (
 
 LOCK TABLES `coin` WRITE;
 /*!40000 ALTER TABLE `coin` DISABLE KEYS */;
-INSERT INTO `coin` VALUES (1,'Ethereum','ETH','eth.png'),(2,'Bitcoin','BTC','btc.png');
+INSERT INTO `coin` VALUES (1,'Ethereum','ETH','eth.png'),(2,'Bitcoin','BTC','btc.png'),(3,'Dogecoin','DOGE','doge.png'),(4,'Litecoin','LITE','lite.png'),(5,'Ethereum Classic','ETC','etc.png'),(6,'Monero','XMR','xmr.png');
 /*!40000 ALTER TABLE `coin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `coin_hashrate` (
   PRIMARY KEY (`id`),
   KEY `coin_id` (`coin_id`),
   CONSTRAINT `coin_hashrate_ibfk_1` FOREIGN KEY (`coin_id`) REFERENCES `coin` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,8 +66,120 @@ CREATE TABLE `coin_hashrate` (
 
 LOCK TABLES `coin_hashrate` WRITE;
 /*!40000 ALTER TABLE `coin_hashrate` DISABLE KEYS */;
-INSERT INTO `coin_hashrate` VALUES (1,1,'921782914524603',29),(2,1,'921782914524603',29),(3,2,'1.8536e20',29);
+INSERT INTO `coin_hashrate` VALUES (18,1,'871292665844185',30),(19,2,'2.0067e20',30),(20,3,'513344201578760',30),(21,5,'23704940255870',30),(22,6,'2427000000',30);
 /*!40000 ALTER TABLE `coin_hashrate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mining_location`
+--
+
+DROP TABLE IF EXISTS `mining_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mining_location` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `country` varchar(255) DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `longitude` float DEFAULT NULL,
+  `mining_pool_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mining_pool_id` (`mining_pool_id`),
+  CONSTRAINT `mining_location_ibfk_1` FOREIGN KEY (`mining_pool_id`) REFERENCES `mining_pool` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mining_location`
+--
+
+LOCK TABLES `mining_location` WRITE;
+/*!40000 ALTER TABLE `mining_location` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mining_location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mining_pool`
+--
+
+DROP TABLE IF EXISTS `mining_pool`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mining_pool` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mining_pool`
+--
+
+LOCK TABLES `mining_pool` WRITE;
+/*!40000 ALTER TABLE `mining_pool` DISABLE KEYS */;
+INSERT INTO `mining_pool` VALUES (1,'https://bitminter.com'),(2,'https://solo.ckpool.org'),(3,'https://slushpool.com'),(4,'https://sigmapool.com'),(5,'http://mmpool.org'),(6,'https://ukrpool.com'),(7,'https://bitcoin.blockwarepool.com'),(8,'https://emcd.io/pool'),(9,'https://pool.laurentiapool.org'),(10,'https://greatpool.ca'),(11,'https://foundrydigital.com'),(12,'https://www.rawpool.com'),(13,'https://lincoin.com'),(14,'https://www.kucoin.com/mining-pool'),(15,'https://soloblocks.io'),(16,'https://mining.luxor.tech'),(17,'https://sbicrypto.com'),(18,'https://marapool.com'),(19,'https://www.ultimuspool.com'),(20,'https://kano.is'),(21,'https://pool.titan.io'),(22,'https://terrapool.io'),(23,'https://cruxpool.com/btc'),(24,'https://beta.zulupool.com'),(25,'https://pool.binance.com'),(26,'https://www.mining-dutch.nl/pools/bitcoin.php'),(27,'https://www.kelepool.com'),(28,'http://mining.securepayment.cc/pools/bitcoin'),(29,'https://www.spiderpool.com'),(30,'https://pool2mine.net'),(31,'https://www.f2pool.com'),(32,'https://www.viabtc.net'),(33,'https://pool.btc.com'),(34,'https://zsolo.bid'),(35,'https://www.okx.com/pool'),(36,'https://luckymonster.pro'),(37,'https://www.nlpool.nl'),(38,'https://lionpool.org'),(39,'https://miningmadness.com'),(40,'https://mpool.eu.org'),(41,'https://1pool.org'),(42,'https://kriptokyng.com/#btc'),(43,'https://anomp.cc'),(44,'https://ccmpool.ro'),(45,'https://au-merged-mine.cminors-pool.com'),(46,'https://jniupool.com'),(47,'http://p2p-spb.xyz:9334'),(48,'https://www.poolin.com'),(49,'https://mining4people.com/#bitcoinpplns'),(50,'http://lidonia.com'),(51,'http://www.dpooltop.com'),(52,'http://38.242.131.141/#latinhashBTC'),(53,'https://prohashing.com'),(54,'https://hashcity.org'),(55,'https://btc.solomining.io'),(56,'https://trustpool.cc'),(57,'https://pool4ever.com'),(58,'https://antpool.com'),(59,'https://legacy.luxor.tech'),(60,'https://ethpool.org'),(61,'https://ethermine.org'),(62,'https://hiveon.net'),(63,'https://rainbowpool.io'),(64,'https://ezil.me'),(65,'https://flexpool.io'),(66,'https://woolypooly.com'),(67,'https://www.kryptex.org'),(68,'https://zetpool.org/eth/'),(69,'https://zetpool.org/eth-pps'),(70,'https://www.tweth.tw'),(71,'http://eth.baypool.org'),(72,'https://ethereum.pool-moscow.ru'),(73,'https://eth.cominers.org'),(74,'https://ztyj0000.com/eth'),(75,'https://eu-ethpool.ddns.net'),(76,'https://pool.imzlabs.net'),(77,'https://solo-eth.poolbe.eu'),(78,'https://www.hkwebstore.com'),(79,'https://eth.solomine.org'),(80,'https://eth-solo.whitepool.net'),(81,'https://eth.ua-mining.com'),(82,'https://solo-eth.ua-mining.com'),(83,'https://gpumine.org'),(84,'https://miningdao.io'),(85,'https://richpool.net'),(86,'https://e4pool.com/eth'),(87,'https://e4pool.com/solo-eth'),(88,'https://ethpool.coinfly.cc'),(89,'https://simpleminer.app'),(90,'https://eth.solopool.org'),(91,'https://hellominer.com/ETH/EthHome.aspx'),(92,'https://moneroocean.stream'),(93,'https://c3pool.com'),(94,'https://cruxpool.com/eth'),(95,'https://eth.digipools.org'),(96,'https://hash.express/eth/#eth'),(97,'https://ethereum.herominers.com'),(98,'https://k1pool.com/pool/eth'),(99,'https://k1pool.com/pool/ethsolo'),(100,'https://www.666pool.com'),(101,'https://eth.crazypool.org'),(102,'https://eth.2miners.com'),(103,'https://solo-eth.2miners.com'),(104,'https://eth.nanopool.org'),(105,'https://ethereum.miningpoolhub.com'),(106,'https://comining.io'),(107,'https://www.xnpool.com'),(108,'https://liberty-pool.com'),(109,'http://zergpool.com'),(110,'https://www.x-pool.io'),(111,'https://mining4people.com/#eth-pplns'),(112,'https://whalesburg.com'),(113,'https://ethcore.ru/pool/ethpool'),(114,'https://baikalmine.com'),(115,'https://eth.molepool.com'),(116,'https://solo-eth.myminers.org'),(117,'https://minerall.io'),(118,'https://www.litecoinpool.org'),(119,'https://akarospool.com'),(120,'https://doge.mininghub.eu'),(121,'https://p2pool.hyperdonkey.com/static'),(122,'http://blockmasters.co'),(123,'https://www.mining-dutch.nl/pools/dogecoin.php'),(124,'https://aikapool.com/doge'),(125,'https://miner-control.de'),(126,'https://cryptopools.aod-tech.com'),(127,'https://merged1.cminors-pool.com'),(128,'https://coinminerz.com'),(129,'https://foxd.darkfibermines.com'),(130,'https://zpool.ca'),(131,'https://pool.criptomyner.ca'),(132,'https://poolx.rwinfo.club'),(133,'https://coinxpool.com'),(134,'https://myminingpool.uk'),(135,'http://p2p-spb.xyz:4556'),(136,'https://coinstop.me'),(137,'https://aminingpool.com/#doge'),(138,'https://aminingpool.com/#dogepplns'),(139,'https://aminingpool.com/#dogesolo'),(140,'https://cryptohamstr.com'),(141,'https://onfirepool.ddns.net'),(142,'https://ltc.solomining.io'),(143,'https://ltc.solopool.org'),(144,'http://minecointo.net:8080'),(145,'https://www.dxpool.net'),(146,'http://mining.securepayment.cc/pools/litecoin'),(147,'https://www.mining-dutch.nl/pools/litecoin.php'),(148,'https://aikapool.com/ltc'),(149,'https://litecoin.miningpoolhub.com'),(150,'https://xpoolx.com'),(151,'https://ausmtpool.finance'),(152,'https://mining4people.com/#litecoin-pplns'),(153,'https://fpool.eu'),(154,'https://bibipool.com'),(155,'https://hash-to-coins.com'),(156,'http://minexmr.com'),(157,'https://www.supportxmr.com'),(158,'https://xmrfast.com'),(159,'https://pool.xmr.pt'),(160,'https://monero.pool-moscow.ru'),(161,'https://bohemianpool.com'),(162,'https://xmr.pukkapool.com'),(163,'https://monero.crypto-pool.fr'),(164,'https://monerohash.com'),(165,'https://web.xmrpool.eu'),(166,'https://cryptonote.social/xmr'),(167,'https://fastpool.xyz/xmr'),(168,'https://monero.ragerx.lol'),(169,'https://xmrpool.sargatxet.cloud'),(170,'https://xmr.pool2mine.net'),(171,'https://xmrnet.com'),(172,'https://minerno.de'),(173,'http://monerop.com'),(174,'https://bluenose.link'),(175,'https://pool.aterx.com'),(176,'https://xmr-pool.com'),(177,'https://p2pool.io/mini'),(178,'https://p2pool.io'),(179,'https://onepool.cc/xmr'),(180,'https://xmr.dook.xyz'),(181,'https://monerod.org'),(182,'https://myriade.io'),(183,'https://xmr.zeropool.io'),(184,'https://xmr.mininghub.eu'),(185,'https://xmr.volt-mine.com'),(186,'https://xmr.azpool.win'),(187,'https://xmr.solopool.org'),(188,'https://hellominer.com/XMR/XmrHome.aspx'),(189,'https://monero.fairhash.org'),(190,'https://monero.herominers.com'),(191,'https://monero.hashvault.pro'),(192,'https://xmr.pool.gntl.co.uk'),(193,'https://cpu.skypool.org'),(194,'https://xmr.2miners.com'),(195,'https://solo-xmr.2miners.com'),(196,'https://xmr.nanopool.org'),(197,'https://monero.miningpoolhub.com'),(198,'https://pool.rplant.xyz'),(199,'https://webxmr.semipool.com'),(200,'https://xmr.pool-pay.com'),(201,'https://zetpool.org/etc'),(202,'https://etc.ua-mining.com'),(203,'https://solo-etc.ua-mining.com'),(204,'https://etc.rupool.pro'),(205,'http://etc.pearpool.com'),(206,'https://etc.pool-moscow.ru'),(207,'https://soloetc.pool-moscow.ru'),(208,'https://etc.4minerspool.com'),(209,'https://etc.baypool.org'),(210,'https://etcpool.us'),(211,'https://pplns.poolbe.eu'),(212,'https://poolbe.eu'),(213,'https://poolit.io'),(214,'http://pooletc.imzlabs.net:8080'),(215,'http://argenpool.org'),(216,'https://etcmining.club'),(217,'https://etc-pool.com'),(218,'http://etc.supermining.site'),(219,'http://solo-etc.supermining.site'),(220,'https://etc.cominers.org'),(221,'https://etc-pps.whitepool.net'),(222,'https://etc-solo.whitepool.net'),(223,'https://etc.ethermine.org'),(224,'https://etc.pool2mine.net'),(225,'https://etc.darkfibermines.com'),(226,'https://etc.solomine.org'),(227,'https://e4pool.com/etc'),(228,'https://e4pool.com/solo-etc'),(229,'https://etc.ravenmine.co'),(230,'https://pool.express'),(231,'https://pool.express/solo'),(232,'https://etc.bliksempool.com'),(233,'https://etc.solopool.org'),(234,'https://hellominer.com/ETC/EtcHome.aspx'),(235,'https://cruxpool.com/etc'),(236,'https://etc.digipools.org'),(237,'https://etc.herominers.com'),(238,'https://k1pool.com/pool/etc'),(239,'https://k1pool.com/pool/etcsolo'),(240,'https://etc.crazypool.org'),(241,'https://etc.2miners.com'),(242,'https://solo-etc.2miners.com'),(243,'https://etc.nanopool.org'),(244,'https://ethereum-classic.miningpoolhub.com'),(245,'https://coolpool.top/pool?coin=etc&type=pplns'),(246,'https://coolpool.top/pool?coin=etcSolo&type=solo'),(247,'https://etc.molepool.com'),(248,'https://etc.myminers.org'),(249,'https://solo-etc.myminers.org'),(250,'https://raptorhash.com');
+/*!40000 ALTER TABLE `mining_pool` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pool_coin`
+--
+
+DROP TABLE IF EXISTS `pool_coin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pool_coin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `coin_id` int NOT NULL,
+  `mining_pool_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `coin_id` (`coin_id`),
+  KEY `mining_pool_id` (`mining_pool_id`),
+  CONSTRAINT `pool_coin_ibfk_1` FOREIGN KEY (`coin_id`) REFERENCES `coin` (`id`),
+  CONSTRAINT `pool_coin_ibfk_2` FOREIGN KEY (`mining_pool_id`) REFERENCES `mining_pool` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=300 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pool_coin`
+--
+
+LOCK TABLES `pool_coin` WRITE;
+/*!40000 ALTER TABLE `pool_coin` DISABLE KEYS */;
+INSERT INTO `pool_coin` VALUES (1,1,60),(2,1,61),(3,1,62),(4,1,64),(5,1,6),(6,1,65),(7,1,8),(8,1,66),(9,1,67),(10,1,68),(11,1,69),(12,1,70),(13,1,71),(14,1,72),(15,1,73),(16,1,74),(17,1,75),(18,1,76),(19,1,77),(20,1,78),(21,1,79),(22,1,81),(23,1,82),(24,1,14),(25,1,83),(26,1,17),(27,1,84),(28,1,85),(29,1,86),(30,1,87),(31,1,89),(32,1,16),(33,1,90),(34,1,91),(35,1,92),(36,1,94),(37,1,95),(38,1,29),(39,1,25),(40,1,96),(41,1,97),(42,1,98),(43,1,99),(44,1,27),(45,1,100),(46,1,101),(47,1,30),(48,1,102),(49,1,103),(50,1,31),(51,1,104),(52,1,105),(53,1,32),(54,1,106),(55,1,33),(56,1,107),(57,1,35),(58,1,109),(59,1,46),(60,1,39),(61,1,110),(62,1,48),(63,1,112),(64,1,113),(65,1,53),(66,1,114),(67,1,54),(68,1,56),(69,1,115),(70,1,116),(71,1,117),(72,1,58),(73,2,2),(74,2,3),(75,2,4),(76,2,5),(77,2,6),(78,2,8),(79,2,9),(80,2,10),(81,2,11),(82,2,12),(83,2,13),(84,2,14),(85,2,15),(86,2,16),(87,2,17),(88,2,19),(89,2,23),(90,2,24),(91,2,25),(92,2,26),(93,2,27),(94,2,31),(95,2,32),(96,2,33),(97,2,34),(98,2,35),(99,2,36),(100,2,40),(101,2,41),(102,2,45),(103,2,46),(104,2,47),(105,2,48),(106,2,49),(107,2,51),(108,2,54),(109,2,55),(110,2,56),(111,2,59),(112,2,58),(113,3,118),(114,3,8),(115,3,120),(116,3,121),(117,3,24),(118,3,123),(119,3,124),(120,3,126),(121,3,31),(122,3,32),(123,3,33),(124,3,34),(125,3,36),(126,3,38),(127,3,128),(128,3,37),(129,3,131),(130,3,41),(131,3,133),(132,3,134),(133,3,135),(134,3,48),(135,3,50),(136,3,137),(137,3,138),(138,3,139),(139,3,56),(140,3,141),(141,3,58),(142,4,118),(143,4,4),(144,4,6),(145,4,8),(146,4,142),(147,4,121),(148,4,143),(149,4,24),(150,4,145),(151,4,25),(152,4,27),(153,4,147),(154,4,148),(155,4,126),(156,4,31),(157,4,149),(158,4,32),(159,4,33),(160,4,34),(161,4,107),(162,4,35),(163,4,36),(164,4,127),(165,4,128),(166,4,39),(167,4,40),(168,4,130),(169,4,109),(170,4,134),(171,4,46),(172,4,48),(173,4,53),(174,4,54),(175,4,56),(176,4,155),(177,4,58),(178,5,201),(179,5,202),(180,5,203),(181,5,205),(182,5,206),(183,5,207),(184,5,209),(185,5,210),(186,5,211),(187,5,212),(188,5,213),(189,5,214),(190,5,215),(191,5,216),(192,5,217),(193,5,218),(194,5,219),(195,5,220),(196,5,221),(197,5,222),(198,5,223),(199,5,224),(200,5,62),(201,5,64),(202,5,66),(203,5,225),(204,5,67),(205,5,226),(206,5,227),(207,5,228),(208,5,65),(209,5,229),(210,5,231),(211,5,232),(212,5,233),(213,5,234),(214,5,235),(215,5,236),(216,5,29),(217,5,25),(218,5,237),(219,5,238),(220,5,239),(221,5,27),(222,5,100),(223,5,240),(224,5,241),(225,5,242),(226,5,31),(227,5,243),(228,5,244),(229,5,32),(230,5,106),(231,5,33),(232,5,107),(233,5,245),(234,5,246),(235,5,41),(236,5,109),(237,5,39),(238,5,110),(239,5,48),(240,5,53),(241,5,114),(242,5,54),(243,5,247),(244,5,248),(245,5,249),(246,5,117),(247,5,250),(248,5,58),(249,6,156),(250,6,157),(251,6,158),(252,6,159),(253,6,160),(254,6,161),(255,6,162),(256,6,163),(257,6,164),(258,6,165),(259,6,166),(260,6,167),(261,6,168),(262,6,169),(263,6,170),(264,6,171),(265,6,172),(266,6,173),(267,6,174),(268,6,175),(269,6,176),(270,6,177),(271,6,178),(272,6,180),(273,6,181),(274,6,67),(275,6,183),(276,6,184),(277,6,185),(278,6,66),(279,6,187),(280,6,92),(281,6,93),(282,6,145),(283,6,189),(284,6,190),(285,6,191),(286,6,192),(287,6,193),(288,6,194),(289,6,195),(290,6,196),(291,6,197),(292,6,198),(293,6,108),(294,6,39),(295,6,199),(296,6,109),(297,6,200),(298,6,53),(299,6,54);
+/*!40000 ALTER TABLE `pool_coin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pool_hashrate`
+--
+
+DROP TABLE IF EXISTS `pool_hashrate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pool_hashrate` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `hashrate` varchar(255) DEFAULT NULL,
+  `week` int DEFAULT '0',
+  `mining_pool_id` int NOT NULL,
+  `coin_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `mining_pool_id` (`mining_pool_id`),
+  KEY `coin_id` (`coin_id`),
+  CONSTRAINT `pool_hashrate_ibfk_1` FOREIGN KEY (`mining_pool_id`) REFERENCES `mining_pool` (`id`),
+  CONSTRAINT `pool_hashrate_ibfk_2` FOREIGN KEY (`coin_id`) REFERENCES `coin` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pool_hashrate`
+--
+
+LOCK TABLES `pool_hashrate` WRITE;
+/*!40000 ALTER TABLE `pool_hashrate` DISABLE KEYS */;
+INSERT INTO `pool_hashrate` VALUES (2,'25165834576896068',30,2,2),(3,'1.2139948997517855e19',30,3,2),(4,'1.19925255087069e18',30,4,2),(5,'10849937190355.03',30,5,2),(6,'2.865370783390534e17',30,6,2),(8,'3.7287426775147935e18',30,8,2),(9,'323282218934911.1',30,9,2),(10,'2.360192731609467e18',30,10,2),(11,'4.427842150840237e19',30,11,2),(12,'2.4705651566627226e18',30,12,2),(13,'1.631986189343195e17',30,13,2),(14,'4.3722639330118364e18',30,14,2),(15,'256160763397633.1',30,15,2),(16,'6.306577010351191e18',30,16,2),(17,'3.3675419541420104e18',30,17,2),(18,'2.4225841657656797e17',30,19,2),(19,'1343697351248521',30,23,2),(20,'941196501183.432',30,24,2),(21,'2.112214462857988e19',30,25,2),(22,'29096820986171590',30,26,2),(23,'6.881559907502964e17',30,27,2),(27,'3.051997399372783e19',30,31,2),(28,'1.8507861874674553e19',30,32,2),(29,'8.550385806603547e18',30,33,2),(30,'1.3341523112603546e17',30,34,2),(31,'97323029663905.31',30,35,2),(32,'76558575185029580',30,36,2),(36,'2.7197321454023675e18',30,40,2),(37,'85459352538165740',30,41,2),(41,'46669888940151.51',30,45,2),(42,'54027991124260310',30,46,2),(43,'1010835769182840.5',30,47,2),(44,'2.411056161242603e19',30,48,2),(45,'32536729346.81656',30,49,2),(47,'30132978550295864',30,51,2),(50,'1.9757746807485037e17',30,54,2),(51,'954598052990532.1',30,55,2),(52,'1.5318737835443804e18',30,56,2),(54,'3.273586809704143e19',30,58,2),(55,'5584833782282051',30,59,2),(56,'3822444444',30,60,1),(57,'261846820570833.3',30,61,1),(58,'95821388030833.33',30,62,1),(59,'23830705940892.85',30,64,1),(60,'47682220854583.37',30,65,1),(61,'93325792719.64284',30,66,1),(62,'1056807915904.7615',30,67,1),(63,'321563061507.7379',30,68,1),(64,'169352653795.83325',30,69,1),(65,'1431380741.9702387',30,70,1),(66,'25165983.767857138',30,71,1),(67,'104303034477.32149',30,72,1),(68,'12831299.38095238',30,73,1),(69,'137993288232.67853',30,74,1),(70,'806962.8095238096',30,75,1),(71,'26055948420.297615',30,76,1),(72,'2315927185.5297613',30,77,1),(73,'102217097612.20244',30,78,1),(74,'1956484509.779762',30,79,1),(75,'2519519.9939024393',30,81,1),(76,'840531529.9451215',30,82,1),(77,'11631457551785.719',30,83,1),(78,'65256801.464285724',30,84,1),(79,'18921956621309.543',30,85,1),(80,'666928519360.7147',30,86,1),(81,'1540733496.9573178',30,87,1),(82,'1940747424916.666',30,89,1),(83,'419001339616.6665',30,90,1),(84,'187443174563.09518',30,91,1),(85,'33974343960.17859',30,92,1),(86,'949171453388.6897',30,94,1),(87,'3593499793.619048',30,95,1),(88,'11566443005922.615',30,29,1),(89,'45543587034.22619',30,96,1),(90,'282161646586.9048',30,97,1),(91,'145918393780.47632',30,98,1),(92,'3143645643817.2607',30,99,1),(93,'4020212962964.288',30,100,1),(94,'2475750404809.5234',30,101,1),(95,'24865890921.369057',30,30,1),(96,'63074846003214.28',30,102,1),(97,'6766148119172.62',30,103,1),(98,'26074381813392.848',30,104,1),(99,'21289565857023.816',30,105,1),(100,'43305223158.63095',30,106,1),(101,'2615098214285.715',30,107,1),(102,'361969273.8154764',30,109,1),(103,'137200933361.30951',30,39,1),(104,'5250536407969.699',30,110,1),(105,'16106859344.305973',30,112,1),(106,'375601288.65822786',30,113,1),(107,'153719711339.28564',30,53,1),(108,'194146819358.92853',30,114,1),(109,'947222220.7784425',30,115,1),(110,'4870085.595238095',30,116,1),(111,'218030507239.9222',30,117,1),(112,'74555026960773.78',30,118,3),(113,'2794312238.6130953',30,120,3),(114,'532870629616.0715',30,121,3),(115,'2357052014619.0483',30,123,3),(116,'31175987570.000004',30,124,3),(117,'1234490105.7202384',30,126,3),(118,'1308.1309523809523',30,38,3),(119,'29945134486.845234',30,128,3),(120,'349716.4285714286',30,37,3),(121,'36570140.64880952',30,131,3),(122,'62.6547619047619',30,133,3),(123,'17229982.476190478',30,134,3),(124,'1587185427.9107149',30,135,3),(125,'47617002.38095238',30,50,3),(126,'2634.6190476190477',30,137,3),(127,'133.94610778443115',30,138,3),(128,'1138.9281437125749',30,139,3),(129,'378312181.8645833',30,141,3),(130,'891909245.4852074',30,142,4),(131,'42207571005.91714',30,143,4),(132,'2976168639053.254',30,145,4),(133,'1491128113059.1719',30,147,4),(134,'5761674671.597634',30,148,4),(135,'1529149905.1834316',30,149,4),(136,'5.100591715976331',30,127,4),(137,'1307956.544378699',30,130,4),(138,'41137.27810650888',30,155,4),(139,'949857243.4880956',30,156,6),(140,'356052962.98809516',30,157,6),(141,'860380.9107142856',30,158,6),(142,'150669.47619047627',30,159,6),(143,'617592.8928571427',30,160,6),(144,'310853.55357142864',30,161,6),(145,'3296.5238095238096',30,162,6),(146,'165238.3273809524',30,163,6),(147,'4031643.541666665',30,164,6),(148,'73489668.64285713',30,165,6),(149,'2561983.32738095',30,166,6),(150,'249316.3511904761',30,167,6),(151,'353973.6726190475',30,168,6),(152,'1010559.3571428574',30,169,6),(153,'180.1130952380952',30,170,6),(154,'494.4583333333333',30,171,6),(155,'736.8452380952381',30,172,6),(156,'296851.8928571427',30,173,6),(157,'9949.392857142851',30,174,6),(158,'298429.4821428571',30,175,6),(159,'384339.261904762',30,176,6),(160,'7219804.4226190485',30,177,6),(161,'113783011.1904762',30,178,6),(162,'6463.619047619049',30,180,6),(163,'16618138.982142864',30,181,6),(164,'13091.20238095238',30,183,6),(165,'1452.2619047619044',30,184,6),(166,'155688.57738095234',30,185,6),(167,'10392423.934523806',30,187,6),(168,'109586996.10119046',30,93,6),(169,'43507.54166666664',30,189,6),(170,'8201025.31547619',30,190,6),(171,'53252912.85714285',30,191,6),(172,'1334540.68452381',30,192,6),(173,'31828381.791666653',30,193,6),(174,'38049315.273809545',30,194,6),(175,'45275112.29166668',30,195,6),(176,'375700725.0119045',30,196,6),(177,'9868322.458333327',30,197,6),(178,'2048848.1250000007',30,198,6),(179,'1311855.5357142854',30,108,6),(180,'540.6607142857142',30,199,6),(181,'5040.017857142858',30,200,6),(182,'20551502383.66864',30,201,5),(183,'142659.45454545456',30,202,5),(184,'2717938495.272727',30,203,5),(185,'708119.1775147929',30,205,5),(186,'1075882841.6331363',30,206,5),(187,'1051742174.0650892',30,207,5),(188,'52980753.313609496',30,209,5),(189,'5856484808.437868',30,210,5),(190,'51325149.254437864',30,211,5),(191,'4576156706.189349',30,212,5),(192,'18676234.497041415',30,213,5),(193,'220262326.60355031',30,214,5),(194,'2974057723.6035514',30,215,5),(195,'977660878.7100589',30,216,5),(196,'698335861.8284022',30,217,5),(197,'33803937.331360936',30,218,5),(198,'1579318115.0295851',30,219,5),(199,'162801008.14201188',30,220,5),(200,'693668550.295858',30,221,5),(201,'153843106.50887573',30,222,5),(202,'6675812819313.609',30,223,5),(203,'355678840.02366865',30,224,5),(204,'46139820.7810651',30,225,5),(205,'209285623.39053252',30,226,5),(206,'30846840544.606075',30,227,5),(207,'16991632647.68485',30,228,5),(208,'70483246.0591716',30,229,5),(209,'8288415.775147928',30,231,5),(210,'388703746.7461539',30,232,5),(211,'134329094674.55624',30,233,5),(212,'2342615882.9053264',30,234,5),(213,'28578412851.479298',30,235,5),(214,'860656935.893491',30,236,5),(215,'44073326588.81659',30,237,5),(216,'8265137945.284023',30,238,5),(217,'4582571611.609468',30,239,5),(218,'371142271352.07086',30,240,5),(219,'4910544605017.754',30,241,5),(220,'495077917789.3491',30,242,5),(221,'1189265509467.4553',30,243,5),(222,'673814188557.3961',30,244,5),(223,'917338816.5680474',30,245,5),(224,'6642893491.124263',30,246,5),(225,'459178554.36486536',30,247,5),(226,'62366639086.390526',30,248,5),(227,'1562827037.3076918',30,249,5),(228,'17696591.240740743',30,250,5);
+/*!40000 ALTER TABLE `pool_hashrate` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -83,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-22 22:08:10
+-- Dump completed on 2022-07-25 20:29:29
