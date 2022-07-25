@@ -24,6 +24,7 @@ class MiningPool(db.Model):
     __tablename__ = 'mining_pool'
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     url = db.Column(db.String(255))
+    country = db.Column(db.String(255))
     pool_hashrates = db.relationship('PoolHashrate', backref='mining_pool', lazy=True)
     mining_location = db.relationship('MiningLocation', backref='mining_pool', lazy=True)
     pool_coin = db.relationship('PoolCoin', backref='mining_pool', lazy=True)

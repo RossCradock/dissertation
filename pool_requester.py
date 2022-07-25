@@ -15,11 +15,18 @@ def get_pool_data():
             pool_data = response.json()
             for pool in pool_data['data']:
                 # add to mining_pool if it doesn't exist
-                mining_pool = MiningPool.query.filter_by(url=pool['url']).first()
+                mining_pool = MiningPool.query.filter_by(url=pool['url'], country=pool['country']).first()
                 if not mining_pool:
-                    mining_pool = MiningPool(url=pool['url'])
-                    db.session.add(mining_pool)
-                    db.session.commit()
+                    # check if the mining pool is already in the database just with a url
+                    mining_pool_by_url = MiningPool.query.filter_by(url=pool['url']).first()
+                    if mining_pool_by_url:
+                        mining_pool = mining_pool_by_url
+                        mining_pool_by_url.country = pool['country']
+                        db.session.commit()
+                    else:
+                        mining_pool = MiningPool(url=pool['url'], country=pool['country'])
+                        db.session.add(mining_pool)
+                        db.session.commit()
 
                 # add to PoolHashrate if that week doesn't exist
                 week = int(datetime.now().strftime("%W"))

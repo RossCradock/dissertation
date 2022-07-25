@@ -12,7 +12,6 @@ def hello_world():  # put application's code here
 
 # commands
 def run_commands():
-    pass
     pull_hashrates()
     get_pool_data()
 
