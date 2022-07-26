@@ -53,3 +53,4 @@ class MiningLocation(db.Model):
     country = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
+    server_url = db.Column(db.String(255))
