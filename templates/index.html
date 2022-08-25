@@ -13,12 +13,32 @@
 
     <!-- geocharts -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../static/geochart.js"></script>
+
+    <!-- load main -->
+    <script>
+        let coin = "{{ coin }}";
+        let week = {{ week }};
+        let scenario = "{{ scenario }}";
+    </script>
+    <script src="../../static/main.js"></script>
+
+    <!-- load bokeh graph -->
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.0.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.0.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.0.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.0.min.js"
+        crossorigin="anonymous"></script>
+    {{ graph_script|safe }}
 
 </head>
 <body class="container-fluid">
 
-<div id="nav" class="row">
+<div id="nav" class="row" style="position: absolute; width: 100%; z-index: 2;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -75,14 +95,39 @@
     <div class="col-lg-1">
     </div>
     <div class="col-lg-10">
-        <div id="regions_div">
-    </div>
-    <div class="col-lg-1">
+        <div id="map-overlay" class="container">
+            <div id="world_map_div" style="width: 1063px; position: absolute; margin-top: -75px">
+            </div>
+
+            <div style="z-index: 1; position: absolute; padding-top: 150px">
+                <?xml version="1.0" encoding="UTF-8"?>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1063px"
+                     height="408px" viewBox="0 0 1062 408" version="1.1">
+                    <g id="surface1">
+                        <path style="fill:none;stroke-width:2.29167;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:8;"
+                              d="M 343.000235 1271.110237 C 658.245822 1325.728688 973.491408 1380.347139 1244.636417 1381.981962 C 1515.792402 1383.605813 1969.870292 1280.886259 1969.870292 1280.886259 C 2194.192738 1247.739947 2367.884034 1185.243624 2590.571092 1183.071174 C 2813.258151 1180.887753 3159.543167 1231.435604 3306.003619 1267.851562 "
+                              transform="matrix(0.355898,0,0,0.356021,-115.66689,-339.287958)"/>
+                        <path style="fill:none;stroke-width:2.29167;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:8;"
+                              d="M 333.001324 1153.545611 C 648.356668 1208.449334 963.712012 1263.342084 1234.944827 1264.976907 C 1506.177642 1266.622702 1960.420168 1163.387466 1960.420168 1163.387466 C 2184.819444 1130.065602 2358.554643 1067.251091 2581.329508 1065.06767 C 2804.093397 1062.884249 3150.488171 1113.684455 3297.003502 1150.275965 "
+                              transform="matrix(0.355898,0,0,0.356021,-115.66689,-339.287958)"/>
+                        <path style="fill:none;stroke-width:2.29167;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:8;"
+                              d="M 330.004944 1045.548541 C 645.25053 1100.452263 960.496116 1155.345014 1231.641125 1156.979837 C 1502.786135 1158.61466 1956.875 1055.390395 1956.875 1055.390395 C 2181.18647 1022.068532 2354.877766 959.254021 2577.564825 957.0706 C 2800.262859 954.887178 3146.5369 1005.676413 3292.997352 1042.278895 "
+                              transform="matrix(0.355898,0,0,0.356021,-115.66689,-339.287958)"/>
+                        <path style="fill:none;stroke-width:2.29167;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:8;"
+                              d="M 333.001324 1983.114085 C 648.356668 2037.732537 963.712012 2092.350988 1234.944827 2093.974839 C 1506.177642 2095.609662 1960.420168 1992.890108 1960.420168 1992.890108 C 2184.819444 1959.743796 2358.554643 1897.2365 2581.329508 1895.075023 C 2804.093397 1892.891602 3150.488171 1943.439453 3297.003502 1979.855411 "
+                              transform="matrix(0.355898,0,0,0.356021,-115.66689,-339.287958)"/>
+                    </g>
+                </svg>
+
+            </div>
+        </div>
+        <div class="col-lg-1">
+        </div>
     </div>
 </div>
-<div id="details" class="row">
+<div id="details" class="row" style="margin-top: 600px;">
     <div id="graph" class="col-md-6">
-        graph
+        {{ graph_div|safe }}
     </div>
     <div id="figuresTable" class="col-md-6">
         figures table

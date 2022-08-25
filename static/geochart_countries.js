@@ -1,3 +1,5 @@
+// https://developers.google.com/chart/interactive/docs/gallery/geochart
+
 google.charts.load('current', {
         'packages':['geochart'],
       });
@@ -15,8 +17,6 @@ google.charts.load('current', {
         ]);
 
         var options = {backgroundColor: '#e5f6fc'};
-
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-
+        var chart = new google.visualization.GeoChart(document.getElementById('world_map_div'));
         chart.draw(data, options);
       }

@@ -54,3 +54,6 @@ class MiningLocation(db.Model):
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
     server_url = db.Column(db.String(255))
+    above_mag_40 = db.Column(db.Boolean())
+    above_mag_50 = db.Column(db.Boolean())
+    above_mag_60 = db.Column(db.Boolean())
