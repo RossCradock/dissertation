@@ -37,7 +37,6 @@ def graph_mining_pool_hashrate(coin, week, solar_lat):
     coin_id = query_data[0][0].coin_id
     total_coin_hashrate = float(CoinHashrate.query.filter_by(coin_id=coin_id, week=week).first().hashrate)
     if solar_lat != 0:
-        # TODO total coin hashrate needs to minus the hashrate of the pools that are not in the geo lat/long
         total_coin_hashrate = 0
         for row in query_data:
             total_coin_hashrate += float(row[0].hashrate)

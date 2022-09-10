@@ -28,7 +28,7 @@ function drawMarkersMap(hashrate_data_markers) {
 
 
 async function getHashrateDataMarkers() {
-    let data_api_url = 'http://127.0.0.1:5000/api/hashrate/solar/markers/bitcoin/30/3'
+    let data_api_url = 'http://127.0.0.1:5000/api/hashrate/solar/markers/bitcoin/30/0'
     // make a request to a url
     fetch(data_api_url)
         .then(response => response.json())

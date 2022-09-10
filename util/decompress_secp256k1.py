@@ -5,7 +5,7 @@ import binascii
 
 
 def enr_decode():
-    with open('not_all.json', 'r') as f:
+    with open('sample_all.json', 'r') as f:
         data = json.load(f)
         for item in data:
             enr_record = data[item]['record']

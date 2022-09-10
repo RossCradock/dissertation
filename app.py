@@ -20,7 +20,7 @@ def home():
 def hello_world(coin, scenario, week):
     coin_id = Coin.query.filter_by(name=coin).first().id
     latest_week = CoinHashrate.query.filter_by(coin_id=coin_id).order_by(CoinHashrate.week.desc()).first().week
-    graph = get_graph_elements(coin, week, scenario, [3])
+    graph = get_graph_elements(coin, week, scenario, [0])
     return render_template('index.html',
                            coin=coin,
                            week=latest_week,
