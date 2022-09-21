@@ -29,4 +29,4 @@ def churn_between_weeks(week_a_filename, week_b_filename):
 
 
 # change file names for different all.json files
-churn_between_weeks('all_25_7.json', 'all_1_8.json')
+churn_between_weeks('all_5_9.json', 'all_12_9.json')

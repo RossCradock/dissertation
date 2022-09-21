@@ -1,7 +1,7 @@
 # https://wdc.kugi.kyoto-u.ac.jp/igrf/
 import requests
 
-from models import MiningLocation
+from models import MiningLocation, SubLocation
 from config import db
 
 '''
@@ -9,6 +9,7 @@ solar_lat = 0: geomagnetic latitude = 0
 solar_lat = 1: geomagnetic latitude = 60
 solar_lat = 2: geomagnetic latitude = 50
 solar_lat = 3: geomagnetic latitude = 40
+solar_lat = 4: geomagnetic latitude = 45
 '''
 
 
@@ -36,23 +37,49 @@ def geographic_to_geomagnetic(lat, long):
 
 
 def run_on_database():
-    mining_pool_locations = MiningLocation.query.filter(MiningLocation.id > 32).all()
+    print('running')
+    # Mining locations
+    mining_pool_locations = MiningLocation.query.all()
     for mining_pool_location in mining_pool_locations:
         if mining_pool_location.latitude is None or mining_pool_location.longitude is None:
             continue
         if -20.0 < mining_pool_location.latitude < 20.0:
             mining_pool_location.above_mag_40 = False
+            mining_pool_location.above_mag_45 = False
             mining_pool_location.above_mag_50 = False
             mining_pool_location.above_mag_60 = False
             mag_lat = mining_pool_location.latitude
         else:
             mag_lat = geographic_to_geomagnetic(mining_pool_location.latitude, mining_pool_location.longitude)
             mining_pool_location.above_mag_40 = mag_lat > 40
+            mining_pool_location.above_mag_45 = mag_lat > 45
             mining_pool_location.above_mag_50 = mag_lat > 50
             mining_pool_location.above_mag_60 = mag_lat > 60
 
         print(mining_pool_location.id, ', ', mining_pool_location.country, ', ', mag_lat)
         db.session.add(mining_pool_location)
+        db.session.commit()
+
+    # sub locations
+    sub_locations = SubLocation.query.all()
+    for sub_location in sub_locations:
+        if sub_location.latitude is None or sub_location.longitude is None:
+            continue
+        if -20.0 < sub_location.latitude < 20.0:
+            sub_location.above_mag_40 = False
+            sub_location.above_mag_45 = False
+            sub_location.above_mag_50 = False
+            sub_location.above_mag_60 = False
+            mag_lat = sub_location.latitude
+        else:
+            mag_lat = geographic_to_geomagnetic(sub_location.latitude, sub_location.longitude)
+            sub_location.above_mag_40 = mag_lat > 40
+            sub_location.above_mag_45 = mag_lat > 45
+            sub_location.above_mag_50 = mag_lat > 50
+            sub_location.above_mag_60 = mag_lat > 60
+
+        print(sub_location.id, ', ', sub_location.country, ', ', mag_lat)
+        db.session.add(sub_location)
         db.session.commit()
 
 

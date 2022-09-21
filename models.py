@@ -54,6 +54,25 @@ class MiningLocation(db.Model):
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
     server_url = db.Column(db.String(255))
+    provider = db.Column(db.String(255))
+    ip_address = db.Column(db.String(255))
     above_mag_40 = db.Column(db.Boolean())
+    above_mag_45 = db.Column(db.Boolean())
+    above_mag_50 = db.Column(db.Boolean())
+    above_mag_60 = db.Column(db.Boolean())
+
+
+class SubLocation(db.Model):
+    __tablename__ = 'sub_location'
+    id = db.Column(db.Integer(), primary_key=True, nullable=False)
+    mining_location_id = db.relationship('MiningLocationId', backref='mining_location', lazy=True)
+    latitude = db.Column(db.Float())
+    longitude = db.Column(db.Float())
+    country = db.Column(db.String(255), nullable=False)
+    server_url = db.Column(db.String(255))
+    ip_address = db.Column(db.String(255))
+    provider = db.Column(db.String(255))
+    above_mag_40 = db.Column(db.Boolean())
+    above_mag_45 = db.Column(db.Boolean())
     above_mag_50 = db.Column(db.Boolean())
     above_mag_60 = db.Column(db.Boolean())

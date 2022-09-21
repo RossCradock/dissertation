@@ -3,8 +3,8 @@ import json
 
 
 def get_enr_record():
-    all_json_file = open('all_9_9.json', 'r')
-    enr_ip_addresses_file = open('enr_ip_addresses.csv', 'a')
+    all_json_file = open('all_9_9_21.json', 'r')
+    enr_ip_addresses_file = open('enr_ip_addresses_21.csv', 'a')
     all_json_contents = all_json_file.read()
     all_json = json.loads(all_json_contents)
     for node in all_json:
