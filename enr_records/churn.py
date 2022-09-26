@@ -23,10 +23,11 @@ def churn_between_weeks(week_a_filename, week_b_filename):
     print('week a size: ' + str(week_a_size))
     print('week b size: ' + str(week_b_size))
     print('amount lost: ' + str(lost))
+    print('similarity: ' + str(1 - (lost / week_a_size)))
     print('lost %: ' + str(lost / week_a_size))
     print('amount gained: ' + str(gained))
     print('gained %: ' + str(gained / week_b_size))
 
 
 # change file names for different all.json files
-churn_between_weeks('all_5_9.json', 'all_12_9.json')
+churn_between_weeks('all_11_7.json', 'all_12_9.json')

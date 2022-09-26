@@ -50,6 +50,7 @@ class MiningLocation(db.Model):
     __tablename__ = 'mining_location'
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
     mining_pool_id = db.Column(db.Integer(), db.ForeignKey('mining_pool.id'), nullable=False)
+    sub_location = db.relationship('SubLocation', backref='mining_location', lazy=True)
     country = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
@@ -65,7 +66,7 @@ class MiningLocation(db.Model):
 class SubLocation(db.Model):
     __tablename__ = 'sub_location'
     id = db.Column(db.Integer(), primary_key=True, nullable=False)
-    mining_location_id = db.relationship('MiningLocationId', backref='mining_location', lazy=True)
+    mining_location_id = db.Column(db.Integer(), db.ForeignKey('mining_location.id'), nullable=False)
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
     country = db.Column(db.String(255), nullable=False)

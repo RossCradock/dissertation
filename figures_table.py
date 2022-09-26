@@ -9,8 +9,6 @@ def get_table_figures():
     mag_45_hashrate = get_solar_hashrate(45)
     mag_50_hashrate = get_solar_hashrate(50)
     mag_60_hashrate = get_solar_hashrate(60)
-    average_hashrate_for_coin = get_average_hashrate()
-    print(f"Average hashrate: {average_hashrate_for_coin}")
     print(f"Mag 40 hashrate: {mag_40_hashrate}")
     print(f"Mag 40 hashrate: {mag_45_hashrate}")
     print(f"Mag 50 hashrate: {mag_50_hashrate}")
@@ -21,12 +19,15 @@ def get_table_figures():
 '''
 
     # provider
-    run_provider_analysis()
+    # run_provider_analysis()
+
+    average_hashrate_for_coin = get_average_hashrate()
+    print(f"Average hashrate: {average_hashrate_for_coin}")
 
 
 def get_average_hashrate():
     pool_hashrates = PoolHashrate.query.filter(
-        PoolHashrate.coin_id == 1,
+        PoolHashrate.coin_id == 2,
         PoolHashrate.week != 30).all()
     total_hashrate = 0
     for hashrate in pool_hashrates:
