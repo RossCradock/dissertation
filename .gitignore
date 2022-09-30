@@ -2,5 +2,3 @@
 .idea/
 __pycache__/
 config.py
-*.csv
-*.json
